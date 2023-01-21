@@ -3,38 +3,47 @@ import {getDetailsMovieApi} from './../../components/servises/Api';
 import {Link, useParams} from 'react-router-dom';
 
 const MovieDetails = () => {
-    const { movieId } = useParams()
-
+    const { movieId } = useParams();
+    
     const [detailsMovie, setDetailsMovie] = useState([]);
 
+
     useEffect(() => {
-        getDetailsMovieApi(movieId).then(setDetailsMovie);
+        if (!movieId) return;
+        const fetchData = async () => {
+            try {
+              const movieIdDetails = await getDetailsMovieApi(movieId);
+              console.log(movieIdDetails);
+              setDetailsMovie(movieIdDetails);
+            } catch (error) {
+              console.log("🚀  error TrendingItem", error);
+            }  
+      }
+      fetchData()
     }, [movieId])
 
-    if (!detailsMovie) {
-        return;
-    }
-    const {poster_path, overview, original_title, release_date, vote_average, genres} = detailsMovie;
-    const year = release_date.slice(0, 4);
-    const userScore = Math.round(vote_average * 10);
-    const genresList = genres.map((genre) => genre.name).join(", ");
+    
+    const {id, poster_path, overview, title, original_title, release_date, vote_average, genres} = detailsMovie;
+    // const year = release_date.slice(0, 4);
+    // const userScore = vote_average.toFixed(1) * 10;
+    // const genresList = genres.map((genre) => genre.name).join(", ");
 
     return(
         
         <div>
-            <Link to="">
+            <Link to="/">
                 Go back
             </Link>
-            {detailsMovie.map((detailsMovie) => (
-            <div>
-                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={original_title} width='50' />
-                <h2>{original_title}${year}</h2>
-                <p>User Score: ${userScore}</p>
+            {detailsMovie && (
+            <div key={id}>
+                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50' />
+                <h2>{original_title}({release_date})</h2>
+                <p>User Score: {vote_average} %</p>
                 <h3>Overview</h3>
                 <p>{overview}</p>
                 <h3>Genres</h3>
-                <p>${genresList}</p>
-            </div>))}
+                <p>{genres}</p>
+            </div>)}
         </div>
     )
 }

@@ -1,18 +1,16 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
-
-
-const Navigation = () => {
+const Navigation = ({children}) => {
     return (
         <>
             <header>
                 <nav>
-                    <NavLink to=''>Home</NavLink>
-                    <NavLink to='movies'>Movies</NavLink>
+                    <NavLink to='/'>Home</NavLink>
+                    <NavLink to='/movies'>Movies</NavLink>
                 </nav>
             </header>
-            <Outlet/>
+            {children}
         </>
     )
 }

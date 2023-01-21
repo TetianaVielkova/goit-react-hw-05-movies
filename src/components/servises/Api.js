@@ -5,7 +5,7 @@ const URL = 'https://api.themoviedb.org/3';
 
 export const getTrendMovieApi = async () => {
     const {data} = await axios.get(`${URL}/trending/movie/week?api_key=${API_KEY}`);
-    console.log(data);
+    // console.log(data);
     return data.results;
 };
 
@@ -15,20 +15,19 @@ export const getSearchMovieApi = async (searchName) => {
     return data.results;
 }
 
-export const getDetailsMovieApi = async (movie_id) => {
-    const {data} = await axios.get(`${URL}/movie/${movie_id}?api_key=${API_KEY}&language=en-US&page=1`);
-    
-    return data.results;
+export const getDetailsMovieApi = async (movieId) => {
+    const {data} = await axios.get(`${URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`);
+    return data;
 }
 
-export const getCreditsMovieApi = async (movie_id) => {
-    const {data} = await axios.get(`${URL}/credit/{movie_id}?api_key=${API_KEY}&language=en-US&page=1`);
+export const getCreditsMovieApi = async (id) => {
+    const {data} = await axios.get(`${URL}/credit/${id}?api_key=${API_KEY}&language=en-US`);
     console.log(data);
     return data.results;
 }
 
-export const getReviewMovieApi = async (movie_id) => {
-    const {data} = await axios.get(`${URL}/review/{movie_id}?api_key=${API_KEY}&language=en-US&page=1`);
+export const getReviewMovieApi = async (id) => {
+    const {data} = await axios.get(`${URL}/review/${id}?api_key=${API_KEY}&language=en-US`);
     console.log(data);
     return data.results;
 }

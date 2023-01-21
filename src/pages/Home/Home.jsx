@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {getTrendMovieApi} from './../../components/servises/Api';
-import {Link, Outlet} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Home = () => {
     const [trendingMovies, setTrendingMovies] = useState([]);
@@ -21,7 +21,6 @@ const Home = () => {
                     </li>
                 ))}
             </ul>
-            <Outlet />
         </div>
     )
 }
