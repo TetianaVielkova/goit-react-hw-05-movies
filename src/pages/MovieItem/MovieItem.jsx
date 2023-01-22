@@ -24,9 +24,6 @@ const MovieDetails = () => {
 
     
     const {id, poster_path, overview, title, original_title, release_date, vote_average, genres} = detailsMovie;
-    // const year = release_date.slice(0, 4);
-    // const userScore = vote_average.toFixed(1) * 10;
-    // const genresList = genres.map((genre) => genre.name).join(", ");
 
     return(
         
