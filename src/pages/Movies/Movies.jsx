@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import {getSearchMovieApi} from './../../components/servises/Api'
 
+
 const Movies = () => {
     const [movieName, setMovieName] = useState('')
     const [searcMovieName, setSearchMovieName] = useState('')
@@ -10,14 +11,12 @@ const Movies = () => {
 
 
     useEffect(() => {
-        if (!searcMovieName) {
-            return;
+        if (!searcMovieName)return;
+        const renderMovie = async () => {
+            const {results} = await getSearchMovieApi(searcMovieName);
+        setMovies(results)
         }
-        const searchMovie = async () => {
-            const {data} = await getSearchMovieApi(searcMovieName);
-            setMovies(data)
-        }
-        searchMovie() 
+       renderMovie() 
     },[searcMovieName])
 
     const handleChange = event => {

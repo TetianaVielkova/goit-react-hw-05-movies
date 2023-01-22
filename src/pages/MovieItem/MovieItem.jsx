@@ -9,17 +9,10 @@ const MovieDetails = () => {
 
 
     useEffect(() => {
-        if (!movieId) return;
-        const fetchData = async () => {
-            try {
-              const movieIdDetails = await getDetailsMovieApi(movieId);
-              console.log(movieIdDetails);
-              setDetailsMovie(movieIdDetails);
-            } catch (error) {
-              console.log("🚀  error TrendingItem", error);
-            }  
-      }
-      fetchData()
+        if (!movieId){
+            return;
+        } 
+        getDetailsMovieApi(movieId).then(setDetailsMovie);
     }, [movieId])
 
     
