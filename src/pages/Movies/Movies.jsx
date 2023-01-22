@@ -1,37 +1,55 @@
 import { useState, useEffect } from "react";
-import {Link, useSearchParams} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {getSearchMovieApi} from './../../components/servises/Api'
 
-import SearchMovie from './../../components/SearchMovie/SearchMovie';
-
 const Movies = () => {
+    const [movieName, setMovieName] = useState('')
+    const [searcMovieName, setSearchMovieName] = useState('')
+    const [movies, setMovies] = useState(null)
 
-    const [movies, setMovie] = useState([]);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const searchName = searchParams.get("searchName") ?? "";
 
     useEffect(() => {
-        if (searchName !== "") {
-            getSearchMovieApi(searchName).then(setMovie);
+        if (!searcMovieName) {
+            return;
         }
-    }, [searchName])
+        const searchMovie = async () => {
+            const {data} = await getSearchMovieApi(searcMovieName);
+            setMovies(data)
+        }
+        searchMovie() 
+    },[searcMovieName])
 
-    const onSubmit = searchName => {
-        setSearchParams( {searchName});
+    const handleChange = event => {
+        setMovieName(event.target.value.toLowerCase());
     };
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        setSearchMovieName(movieName);
+    }
 
     return(
         <div>
-            <SearchMovie onSubmit={onSubmit} searchName={searchName}/>
-            <ul>
+            <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="searchName"
+                autoFocus
+                value={movieName}
+                onChange={handleChange}
+                placeholder="Search movie..."
+            />
+            <button type="submit">Search</button>
+        </form>
+        {movies && (<ul>
             {movies.map(({id, title, poster_path}) => (
                 <li key={id}>
                     <Link to={`/movies/${id}`}>
                     <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50'/>
                     {title}</Link>
                 </li>))}
-            </ul>
+            </ul>)}
         </div>
     )
 }
