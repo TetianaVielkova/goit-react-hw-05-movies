@@ -18,17 +18,18 @@ export const getSearchMovieApi = async (searchName) => {
 
 export const getDetailsMovieApi = async (movieId) => {
     const {data} = await axios.get(`${URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`);
+    console.log(data);
     return data;
 }
 
 export const getCreditsMovieApi = async (id) => {
-    const {data} = await axios.get(`${URL}/credit/${id}?api_key=${API_KEY}&language=en-US`);
+    const {data} = await axios.get(`${URL}/movie/${id}/credit?api_key=${API_KEY}&language=en-US`);
     console.log(data);
     return data.results;
 }
 
 export const getReviewMovieApi = async (id) => {
-    const {data} = await axios.get(`${URL}/review/${id}?api_key=${API_KEY}&language=en-US`);
+    const {data} = await axios.get(`${URL}/movie/${id}/review?api_key=${API_KEY}&language=en-US`);
     console.log(data);
     return data.results;
 }
