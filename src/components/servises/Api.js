@@ -11,8 +11,9 @@ export const getTrendMovieApi = async () => {
 
 
 export const getSearchMovieApi = async (searchName) => {
-    const {data} = await axios.get(`${URL}/search/movie?api_key=${API_KEY}&query=${searchName}&language=en-US&page=1&include_adult=false`);
-    return data.results;
+    const {data} = await axios.get(`${URL}/search/movie?api_key=${API_KEY}&query=${searchName}&language=en-US&include_adult=false`);
+    console.log(data);
+    return data;
 }
 
 export const getDetailsMovieApi = async (movieId) => {

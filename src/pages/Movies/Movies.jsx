@@ -1,38 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {Link, useSearchParams} from 'react-router-dom';
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {getSearchMovieApi} from './../../components/servises/Api'
 
+import SearchMovie from './../../components/SearchMovie/SearchMovie';
 
 const Movies = () => {
-    const [searchName, setSearchName] = useState('');
 
-    const handleChange = event => {
-        setSearchName(event.target.value.toLowerCase());
+    const [movies, setMovie] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchName = searchParams.get("searchName") ?? "";
+
+    useEffect(() => {
+        if (searchName !== "") {
+            getSearchMovieApi(searchName).then(setMovie);
+        }
+    }, [searchName])
+
+    const onSubmit = searchName => {
+        setSearchParams( {searchName});
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (searchName.trim() === '') {
-            toast.error(' Entry movie name!');
-            return;
-    }
-        setSearchName('');
-}
-
     return(
-        <form onSubmit={handleSubmit}>
-            <input>
-                type="text"
-                name="searchName"
-                autoFocus
-                autocomplete="off"
-                value={searchName}
-                onChange={handleChange}
-                placeholder="Search movie..."
-            </input>
-            <button type="submit">Search</button>
-        </form>
+        <div>
+            <SearchMovie onSubmit={onSubmit} searchName={searchName}/>
+            <ul>
+            {movies.map(({id, title, poster_path}) => (
+                <li key={id}>
+                    <Link to={`/movies/${id}`}>
+                    <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50'/>
+                    {title}</Link>
+                </li>))}
+            </ul>
+        </div>
     )
 }
 
