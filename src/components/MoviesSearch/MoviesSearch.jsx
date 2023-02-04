@@ -13,11 +13,11 @@ export const MoviesSearch = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setSearchName('');
         if (searchName.trim() === '') {
             toast.error(' Entry movie name!');
             return;
-    }
-        setSearchName('');
+        }
 }
 
     return(

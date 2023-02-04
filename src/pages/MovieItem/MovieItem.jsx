@@ -6,7 +6,7 @@ const MovieDetails = () => {
     const { movieId } = useParams();
     // console.log(movieId);
     
-    const [detailsMovie, setDetailsMovie] = useState([]);
+    const [detailsMovie, setDetailsMovie] = useState(null);
 
 
     useEffect(() => {
@@ -23,16 +23,17 @@ const MovieDetails = () => {
         <div>
             <Link to="/">
                 Go back
-            </Link>
-            {detailsMovie && <div key={id}>
-                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50' />
+            </Link> 
+            {detailsMovie && (
+            <li key={id}>
+                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50'/>
                 <h2>{original_title}({release_date})</h2>
                 <p>User Score: {vote_average} %</p>
                 <h3>Overview</h3>
                 <p>{overview}</p>
                 <h3>Genres</h3>
                 <p>{genres}</p>
-            </div>}
+            </li>)}
         </div>
     )
 }

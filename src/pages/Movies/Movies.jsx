@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
+import defaultimg from './default-image.jpg'
 
 import {getSearchMovieApi} from './../../components/servises/Api'
 
@@ -45,7 +46,7 @@ const Movies = () => {
             {movies.map(({id, title, poster_path}) => (
                 <li key={id}>
                     <Link to={`/movies/${id}`}>
-                    <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50'/>
+                    <img src={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : {defaultimg}} alt={title} width='100'/>
                     {title}</Link>
                 </li>))}
             </ul>)}
