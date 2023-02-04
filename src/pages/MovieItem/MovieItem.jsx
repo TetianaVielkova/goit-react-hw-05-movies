@@ -10,6 +10,7 @@ const MovieDetails = () => {
 
 
     useEffect(() => {
+        
         getDetailsMovieApi(movieId).then(setDetailsMovie);
     }, [movieId])
 
@@ -17,7 +18,7 @@ const MovieDetails = () => {
         return;
     } 
 
-    const {id, poster_path, overview, title, original_title, release_date, vote_average, genres} = detailsMovie;
+    const {poster_path, overview, title, original_title, release_date, vote_average, genres} = detailsMovie;
 
     return(
         <div>
@@ -25,7 +26,7 @@ const MovieDetails = () => {
                 Go back
             </Link> 
             {detailsMovie && (
-            <li key={id}>
+            <div>
                 <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50'/>
                 <h2>{original_title}({release_date})</h2>
                 <p>User Score: {vote_average} %</p>
@@ -33,7 +34,7 @@ const MovieDetails = () => {
                 <p>{overview}</p>
                 <h3>Genres</h3>
                 <p>{genres}</p>
-            </li>)}
+            </div>)}
         </div>
     )
 }
