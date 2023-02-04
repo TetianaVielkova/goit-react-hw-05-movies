@@ -5,20 +5,19 @@ import {Link, useParams} from 'react-router-dom';
 const MovieDetails = () => {
     const { movieId } = useParams();
     // console.log(movieId);
-    
+
     const [detailsMovie, setDetailsMovie] = useState(null);
 
-
     useEffect(() => {
-        
         getDetailsMovieApi(movieId).then(setDetailsMovie);
     }, [movieId])
-
+    
     if (!detailsMovie){
         return;
     } 
 
     const {poster_path, overview, title, original_title, release_date, vote_average, genres} = detailsMovie;
+
 
     return(
         <div>
