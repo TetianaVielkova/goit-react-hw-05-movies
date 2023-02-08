@@ -4,6 +4,10 @@ import {  Outlet, useLocation, useParams} from 'react-router-dom';
 import defaultimg from './../Movies/default-image.jpg';
 import { Suspense } from 'react';
 import { Container, ContainerInfoItem, ContainerItem, ImageItem, LinkBack, NavLinkNewPage, SubTitle } from './MovieItem.styled';
+import * as Scroll from 'react-scroll';
+
+
+
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -18,6 +22,10 @@ const MovieDetails = () => {
     if (!detailsMovie){
         return;
     } 
+
+    const Scroll = require('react-scroll');
+    const scroll = Scroll.animateScroll;
+
     return(
         <>
             <Container>
@@ -36,8 +44,8 @@ const MovieDetails = () => {
                             <p>{detailsMovie.genres.map(genre => genre.name).join(' ')}</p>
                             <SubTitle>Additional information</SubTitle>
                         <div>
-                            <NavLinkNewPage to='cast'>Cast</NavLinkNewPage>
-                            <NavLinkNewPage to='reviews'>Reviews</NavLinkNewPage>
+                            <NavLinkNewPage to='cast' onClick={scroll.scrollToBottom(50)} >Cast</NavLinkNewPage>
+                            <NavLinkNewPage to='reviews' onClick={scroll.scrollToBottom(50)}>Reviews</NavLinkNewPage>
                         </div>
                         </ContainerInfoItem>
                         

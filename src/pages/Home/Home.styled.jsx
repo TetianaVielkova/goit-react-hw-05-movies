@@ -4,7 +4,11 @@ export const Title = styled.h1`
     font-family: 'Segoe UI';
     font-size: 38px;
     text-align: center;
-    font-weight: 400;
+    font-weight: 600;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border: 4px double #e3e3e3;
 
 `
 
@@ -36,7 +40,7 @@ export const Card = styled.li`
 
 export const Image = styled.img`
     width: 100%;
-    height: 500px;
+    height: 550px;
     object-fit: cover;
     
 `
