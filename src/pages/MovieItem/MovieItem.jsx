@@ -4,7 +4,7 @@ import {  Outlet, useLocation, useParams} from 'react-router-dom';
 import defaultimg from './../Movies/default-image.jpg';
 import { Suspense } from 'react';
 import { Container, ContainerInfoItem, ContainerItem, ImageItem, LinkBack, NavLinkNewPage, SubTitle } from './MovieItem.styled';
-import * as Scroll from 'react-scroll';
+
 
 
 
