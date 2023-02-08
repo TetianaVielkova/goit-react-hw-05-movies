@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import {getTrendMovieApi} from './../../components/servises/Api';
 import {Link} from 'react-router-dom';
+import defaultimg from './../Movies/default-image.jpg'
+import { Card, CardList, Image, ImgTitle, Title } from './Home.styled';
 
 const Home = () => {
     const [trendingMovies, setTrendingMovies] = useState([]);
@@ -11,16 +13,17 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Tranding this week</h1>
-            <ul>
+            <Title>Tranding movies today</Title>
+            <CardList>
                 {trendingMovies.map(({id, title, poster_path}) => (
-                    <li key={id}>
+                    <Card key={id}>
                         <Link to={`/movies/${id}`}>
-                        <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50'/>
-                        {title}</Link>
-                    </li>
+                            <Image src={(poster_path !== null) ? `https://image.tmdb.org/t/p/w500${poster_path}` : `${defaultimg}`} alt={title} width={350} />
+                            <ImgTitle>{title}</ImgTitle>
+                        </Link>
+                    </Card>
                 ))}
-            </ul>
+            </CardList>
         </div>
     )
 }

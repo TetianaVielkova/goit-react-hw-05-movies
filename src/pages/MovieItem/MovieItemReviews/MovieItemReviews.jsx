@@ -1,6 +1,7 @@
 import { getReviewMovieApi } from 'components/servises/Api';
 import {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
+import { Item, List } from './MovieItemReviews.styled';
 
 export const MovieItemReviews = () => {
     const { movieId } = useParams();
@@ -16,13 +17,15 @@ export const MovieItemReviews = () => {
     } 
 
     return(
-        <ul>
+        <List>
             {reviewsMovies ? reviewsMovies.map(({id, author, content}) => (
-                <li key={id}>
+                <Item key={id}>
                     <h4>Author: {author}</h4>
                     <p>{content}</p>
-                </li>
-            )) : <p>There is no review for this movie yet</p> }
-        </ul>
+                </Item>
+            )) : <p>We don't have any reviews for this movie.</p> }
+        </List>
     )
 }
+
+export default MovieItemReviews;
