@@ -5,9 +5,10 @@ import {getSearchMovieApi} from './../../components/servises/Api'
 
 
 const Movies = () => {
-    const [movieName, setMovieName] = useState('')
-    const [searcMovieName, setSearchMovieName] = useState('')
+    const [movieName, setMovieName] = useState('');
+    const [searcMovieName, setSearchMovieName] = useState('');;
     const [movies, setMovies] = useState(null)
+    
 
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const Movies = () => {
                 onChange={handleChange}
                 placeholder="Search movie..."
             />
-            <button type="submit">Search</button>
+            <button type='submit'>Search</button>
         </form>
         {movies && (<ul>
             {movies.map(({id, title, poster_path}) => (

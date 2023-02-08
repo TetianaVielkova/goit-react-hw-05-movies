@@ -8,6 +8,8 @@ import {NotFound} from './NotFound/NotFound';
 import Home from './../pages/Home/Home';
 import MovieDetails from './../pages/MovieItem/MovieItem'
 import Movies from './../pages/Movies/Movies';
+import { MovieItemCast } from 'pages/MovieItem/MovieItemCast/MovieItemCast';
+import { MovieItemReviews } from 'pages/MovieItem/MovieItemReviews/MovieItemReviews';
 
 
 
@@ -19,7 +21,10 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/movies" element={<Movies/>}/>
-          <Route path="/movies/:movieId" element={<MovieDetails />}/>
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<MovieItemCast />}/>
+            <Route path="reviews" element={<MovieItemReviews />}/>
+          </Route>
           
           <Route path="*" element={<NotFound />}/>
         </Routes>

@@ -1,11 +1,10 @@
 import {useState, useEffect} from 'react';
 import {getDetailsMovieApi} from './../../components/servises/Api';
-import {Link, useParams} from 'react-router-dom';
+import {Link, NavLink, Outlet, useParams} from 'react-router-dom';
+import defaultimg from './../Movies/default-image.jpg'
 
 const MovieDetails = () => {
     const { movieId } = useParams();
-    // console.log(movieId);
-
     const [detailsMovie, setDetailsMovie] = useState(null);
 
     useEffect(() => {
@@ -16,25 +15,30 @@ const MovieDetails = () => {
         return;
     } 
 
-    const {poster_path, overview, title, original_title, release_date, vote_average, genres} = detailsMovie;
-
-
     return(
-        <div>
+        <><div>
             <Link to="/">
                 Go back
-            </Link> 
+            </Link>
             {detailsMovie && (
+                <div>
+                    <img src={(detailsMovie.poster_path !== null) ? `https://image.tmdb.org/t/p/w500${detailsMovie.poster_path}` : `${defaultimg}`} alt={detailsMovie.title} width='300' />
+                    <h2>{detailsMovie.original_title} ({detailsMovie.release_date.slice(0, 4)})</h2>
+                    <p>User Score: {detailsMovie.vote_average.toFixed(1)} %</p>
+                    <h3>Overview</h3>
+                    <p>{detailsMovie.overview}</p>
+                    <h3>Genres</h3>
+                    <p>{detailsMovie.genres.map(genre => genre.name).join(' ')}</p>
+                </div>)}
+            </div>
+            <h3>Additional information</h3>
             <div>
-                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width='50'/>
-                <h2>{original_title}({release_date})</h2>
-                <p>User Score: {vote_average} %</p>
-                <h3>Overview</h3>
-                <p>{overview}</p>
-                <h3>Genres</h3>
-                <p>{genres}</p>
-            </div>)}
-        </div>
+                <NavLink to='cast'>Cast</NavLink>
+                <NavLink to='reviews'>Reviews</NavLink>
+            </div>
+            <Outlet/>
+            </>
+            
     )
 }
 
